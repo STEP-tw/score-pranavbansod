@@ -2,8 +2,13 @@ let snake=undefined;
 let food=undefined;
 let numberOfRows=60;
 let numberOfCols=120;
-
+let score=0;
 let animator=undefined;
+
+const updateScore = function() {
+  score+=10;
+}
+
 
 const animateSnake=function() {
   let oldHead=snake.getHead();
@@ -13,10 +18,12 @@ const animateSnake=function() {
   unpaintSnake(oldTail);
   paintHead(head);
   if(head.isSameCoordAs(food)) {
+    updateScore();
     snake.grow();
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
+  displayScore(score);
 }
 
 const changeSnakeDirection=function(event) {
